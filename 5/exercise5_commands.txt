@@ -1,0 +1,4 @@
+gcc -c maths.c -o maths.o
+ar rcs librarymaths.a maths.o
+gcc main5.c -L -lrarymaths -o main5.exe
+./main5.exe

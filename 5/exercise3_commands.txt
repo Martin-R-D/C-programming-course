@@ -1,0 +1,6 @@
+
+Компилиране на main.c, като се включва transformation.c
+
+gcc -c transformation.c - o transformation.o
+gcc main.c  transformation.o -o main_program.exe
+./main_program.exe
