@@ -9,4 +9,4 @@
 *.lib
 
 # Local build directories
-/build/
+build/

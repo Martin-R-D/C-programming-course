@@ -1,22 +1,27 @@
-all: help.out strlength.out strconcat.out strcompare.out
+CC = gcc
+CPPFLAGS ?=
+CFLAGS ?= -Wall -Wextra
+LDFLAGS ?=
+LDLIBS =
+BUILD_DIR := build
 
-help.out: help.c
-	gcc help.c -o help.exe
+.PHONY: all clean
+all: $(BUILD_DIR)/help $(BUILD_DIR)/strlength $(BUILD_DIR)/strconcat $(BUILD_DIR)/strcompare
 
-mystrings.o: mystrings.c
-	gcc -c mystrings.c -o mystrings.o
+$(BUILD_DIR):
+	mkdir -p $@
 
+$(BUILD_DIR)/help: help.c mystrings.h | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) help.c $(LDLIBS) -o $@
 
-strlength.out: strlength.c mystrings.o
-	gcc strlength.c mystrings.o -o strlength.exe
+$(BUILD_DIR)/strlength: strlength.c mystrings.c mystrings.h | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) strlength.c mystrings.c $(LDLIBS) -o $@
 
-strconcat.out: strlength.c mystrings.o strconcat.c
-	gcc strconcat.c mystrings.o -o strconcat.exe
+$(BUILD_DIR)/strconcat: strconcat.c mystrings.c mystrings.h | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) strconcat.c mystrings.c $(LDLIBS) -o $@
 
-strcompare.out: strlength.c mystrings.o strcompare.c
-	gcc strcompare.c mystrings.o -o strcompare.exe
+$(BUILD_DIR)/strcompare: strcompare.c mystrings.c mystrings.h | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) strcompare.c mystrings.c $(LDLIBS) -o $@
 
-clear:
-	rm -f *.o *.out *.exe
- 
-	
+clean:
+	rm -rf $(BUILD_DIR)
