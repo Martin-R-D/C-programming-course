@@ -3,8 +3,8 @@ all: processes.o taskmanager.exe
 processes.o: processes.c
 	gcc -c processes.c -o processes.o
 
-taskmanager.exe: taskmanager.c processes.o processes.c
-	gcc taskmanager.c processes.o -o taskmanager.exe
+taskmanager.exe: task-manager.c processes.o processes.c
+	gcc task-manager.c processes.o -o taskmanager.exe
 
 clean:
 	del *.o *.exe
