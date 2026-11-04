@@ -1,2 +1,0 @@
-gcc fourth-powers.c -lm -o 5-4.exe
-./5-4.exe
